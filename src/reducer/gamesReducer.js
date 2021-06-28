@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const initState = {
   popular: [],
   newGames: [],
@@ -12,4 +14,5 @@ const gamesReducer = (state = initState, action) => {
       return { ...state };
   }
 };
-export default gamesReducer;
+
+//action creator
