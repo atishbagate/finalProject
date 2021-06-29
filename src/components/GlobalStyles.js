@@ -11,7 +11,11 @@ html{
     width: 0.5rem;
   }
   &::-webkit-scrollbar-thumb{
-    background-color: gray;
+    background-color: goldenrod;
+    border:1px double black;
+  }
+  &::-webkit-scrollbar-track{
+    background-color: white;
   }
 }
 body{
