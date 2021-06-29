@@ -34,3 +34,11 @@ export const popularGamesURL = () => `${base_url}${popular_games}`;
 export const newGamesURL = () => `${base_url}${newGames}`;
 
 export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
+
+//gaming details
+export const gameDetailsURL = (game_id) =>
+  `${base_url}games/${game_id}?key=798277c69c004edea18eb671bda9ebd2`;
+
+//screen shoot fetching details
+export const gameScreenshotURL = (game_id) =>
+  `${base_url}games/${game_id}/screenshots?key=798277c69c004edea18eb671bda9ebd2`;
