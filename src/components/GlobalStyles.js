@@ -20,12 +20,13 @@ html{
 }
 body{
   font-family: 'Benne', serif;
-  width: 100%;
+  width: 100%;  
   
 }
- h2{
+ h3{
  font-family: 'Oswald', sans-serif;
- font-size: 3rem;
+ font-size: 1.5rem;
+ padding: 1.5rem 0rem;
 } 
 p{
   font-size: 1.2rem;
@@ -35,6 +36,9 @@ p{
 a{
   text-decoration:none;
   color:#333;
+}
+img{
+  display:block;
 }
 `;
 
