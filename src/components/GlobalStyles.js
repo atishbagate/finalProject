@@ -40,6 +40,10 @@ a{
 img{
   display:block;
 }
+input{
+  font-weight: bold;
+    font-family: "Oswald", sans-serif;
+}
 `;
 
 export default GlobalStyles;
