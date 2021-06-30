@@ -5,51 +5,102 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { smallImage } from "../util";
+//imgs
+import apple from "../img/apple.png";
+import steam from "../img/steam.png";
+import xboz from "../img/xboz.png";
+import nintendo from "../img/nintendo.png";
+import playstation from "../img/playstation.png";
+import joy from "../img/joy.png";
+//starts
+import starfull from "../img/starfull.png";
+import starzero from "../img/starzero.png";
 
-const GameDetail = () => {
+const GameDetail = ({ pathId }) => {
   const { game, screen } = useSelector((state) => state.detail);
   const history = useHistory();
   const exitHandler = (e) => {
     const element = e.target;
-    console.log(element);
     if (element.classList.contains("shadow")) {
       document.body.style.overflow = "auto";
       history.push("/");
     }
   };
+  //function for calling img
+  const getPlatform = (platform) => {
+    switch (platform) {
+      case "PlayStation 4":
+        return playstation;
+      case "Xbox One":
+        return xboz;
+      case "PC":
+        return steam;
+      case "iOS":
+        return apple;
+      case "nintendo":
+        return nintendo;
+      default:
+        return joy;
+    }
+  };
+  // star logic
+  const getStars = () => {
+    const stars = [];
+    const rating = Math.floor(game.rating);
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<img alt="star" key={i} src={starfull}></img>);
+      } else {
+        stars.push(<img alt="star" key={i} src={starzero}></img>);
+      }
+    }
+    return stars;
+  };
+
   return (
     <>
       {game && (
         <CardShadow className="shadow" onClick={exitHandler}>
-          <Detail>
+          <Detail layoutId={pathId}>
             <Stats>
               <div className="rating">
-                <h3>{game.name}</h3>
-                <h3>Rating: {game.rating}</h3>
+                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
+                <motion.h3 layoutId={`h3 ${pathId}`}>
+                  Rating: {game.rating}
+                </motion.h3>
+                {getStars()}
               </div>
               <Info>
-                <h3>Platforms</h3>
+                <motion.h3 layoutId={`h3 ${pathId}`}>Platforms</motion.h3>
                 <Platforms>
                   {game.platforms.map((data) => (
-                    <h3 key={data.platform.id}>{data.platform.name}.</h3>
+                    <img
+                      key={data.platform.id}
+                      src={getPlatform(data.platform.name)}
+                      alt={data.platform.name}
+                    ></img>
                   ))}
                 </Platforms>
               </Info>
             </Stats>
 
             <Media>
-              <img
+              <motion.img
+                layoutId={`img ${pathId}`}
                 src={smallImage(game.background_image, 1280)}
                 alt={game.background_image}
               />
             </Media>
             <Description>
-              <p>{game.description_raw}</p>
+              <motion.p layoutId={`p ${pathId}`}>
+                {game.description_raw}
+              </motion.p>
             </Description>
             <div className="gallery">
               {screen.results.map((screen) => (
                 <>
-                  <img
+                  <motion.img
+                    layoutId={`img ${pathId}`}
                     src={smallImage(screen.image, 1280)}
                     key={screen.id}
                     alt={screen.image}
@@ -71,6 +122,7 @@ const CardShadow = styled(motion.div)`
   overflow-y: scroll;
   background: (0, 0, 0, 0.2);
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
 
@@ -91,6 +143,7 @@ const Detail = styled(motion.div)`
   padding: 2rem 7rem;
   background: lightgray;
   position: absolute;
+  z-index: 10;
   left: 10%;
   color: black;
   img {
@@ -101,6 +154,11 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline;
+  }
 `;
 const Info = styled(motion.div)`
   text-align: center;

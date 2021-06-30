@@ -10,20 +10,23 @@ import Game from "../components/Games";
 import GameDetail from "../components/GamesDetail";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadGames());
-  }, [dispatch]);
   //get data back
   const { popular, newGames, upcoming } = useSelector((state) => state.games);
 
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadGames());
+  }, [dispatch]);
+
   return (
     <Gamelist>
-      {pathId && <GameDetail />}
-
+      {/* <AnimateSharedLayout type="crossfade">
+        <AnimatePresence> */}
+      {pathId && <GameDetail pathId={pathId} />}
+      {/* </AnimatePresence> */}
       <h2>upcoming games</h2>
       <Games>
         {upcoming.map((game) => (
@@ -36,7 +39,6 @@ const Home = () => {
           />
         ))}
       </Games>
-      {/* </AnimateSharedLayout> */}
       <h2>popular games</h2>
       <Games>
         {popular.map((game) => (
@@ -61,6 +63,7 @@ const Home = () => {
           />
         ))}
       </Games>
+      {/* </AnimateSharedLayout> */}
     </Gamelist>
   );
 };
