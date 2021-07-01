@@ -11,7 +11,9 @@ import GameDetail from "../components/GamesDetail";
 
 const Home = () => {
   //get data back
-  const { popular, newGames, upcoming } = useSelector((state) => state.games);
+  const { popular, newGames, upcoming, searched } = useSelector(
+    (state) => state.games
+  );
 
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
@@ -27,6 +29,27 @@ const Home = () => {
         <AnimatePresence> */}
       {pathId && <GameDetail pathId={pathId} />}
       {/* </AnimatePresence> */}
+
+      {/* getting searched result  */}
+      {searched.length ? (
+        <div>
+          <h2>searched games</h2>
+          <Games>
+            {searched.map((game) => (
+              <Game
+                name={game.name}
+                released={game.released}
+                id={game.id}
+                image={game.background_image}
+                key={game.id}
+              />
+            ))}
+          </Games>
+        </div>
+      ) : (
+        ""
+      )}
+
       <h2>upcoming games</h2>
       <Games>
         {upcoming.map((game) => (

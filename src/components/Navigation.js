@@ -17,10 +17,14 @@ const Navigation = () => {
   const submitSearch = (e) => {
     e.preventDefault();
     dispatch(fetchSearch(text));
+    setText("");
+  };
+  const clearSearch = () => {
+    dispatch({ type: "CLEAR_SEARCHED" });
   };
   return (
     <StyledNav>
-      <Logo>
+      <Logo onClick={clearSearch}>
         <img src={logo} alt="images" />
         <h1>Games</h1>
       </Logo>
