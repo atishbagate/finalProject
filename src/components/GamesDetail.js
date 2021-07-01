@@ -15,6 +15,8 @@ import joy from "../img/joy.png";
 //starts
 import starfull from "../img/starfull.png";
 import starzero from "../img/starzero.png";
+//animation
+import { cardUp } from "../animation";
 
 const GameDetail = ({ pathId }) => {
   const { game, screen } = useSelector((state) => state.detail);
@@ -60,7 +62,14 @@ const GameDetail = ({ pathId }) => {
   return (
     <>
       {game && (
-        <CardShadow className="shadow" onClick={exitHandler}>
+        <CardShadow
+          variants={cardUp}
+          initial="hidden"
+          animate="show"
+          exit="out"
+          className="shadow"
+          onClick={exitHandler}
+        >
           <Detail layoutId={pathId}>
             <Stats>
               <div className="rating">

@@ -6,6 +6,8 @@ import logo from "../img/logo.png";
 //redux and routers
 import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
+//animation
+import { fadeIn } from "../animation";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ const Navigation = () => {
     dispatch({ type: "CLEAR_SEARCHED" });
   };
   return (
-    <StyledNav>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={clearSearch}>
         <img src={logo} alt="images" />
         <h1>Games</h1>
